@@ -4,7 +4,6 @@ import spacy
 import string
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer 
-from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error as mse
 
@@ -44,14 +43,14 @@ X_train = vectorizer.transform(X_train)
 X_test = vectorizer.transform(X_test )
 
 ridge = Ridge(fit_intercept = True)
-lr = LinearRegression()
 
 X = X_train
 y = y_train
 
 ridge.fit(X, y)
-lr.fit(X, y)
 
-y_pred_lr = lr.predict(X_test)
+y_pred_ridge = ridge.predict(X_test)
 
-MSE = mse(y_test, y_pred_lr)
+MSE = mse(y_test, y_pred_ridge)
+
+print(MSE)
